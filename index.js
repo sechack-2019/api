@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 
 app.get('/api/v1/check-text', (request, response) => {
 	if (request.body === undefined) {
-		response.json(false);
+		response.json({});
 	}
 
 	const text = request.body.text;
@@ -34,7 +34,7 @@ app.get('/api/v1/check-text', (request, response) => {
 	];
 	*/
 
-	response.json(true);
+	response.json({hoge: 'fuga'});
 });
 
 const port = process.env.PORT || 5000;
