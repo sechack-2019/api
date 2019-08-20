@@ -22,7 +22,7 @@ app.post('/api/v1/post', (request, response) => {
     // const data = request.body;
     // const text = data.text;
 
-	console.log(request.text || 'No Text');
+	console.log(request.body.text || 'No Text');
 
     response.json({text: 'hello'});
 });
