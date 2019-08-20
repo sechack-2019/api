@@ -5,15 +5,13 @@ const app = express();
 
 app.use(cors());
 
-app.get('/api/get', (req, res) => {
-	const text = 'test'; //req.body ? '' : req.body.text;
+app.get('/api/post', (req, res) => {
+	const text = req.body === undefined ? 'undefined' : req.body.text;
 	const uuid = uuidv4();
 
 	console.log('\npost:', text, '\nuuid:', uuid);
 	
-	const data = [
-		{title: 'hoge', done: true}
-	];
+	const data = {text, flag: true};
 
 	res.json(data);
 });
