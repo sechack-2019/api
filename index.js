@@ -9,11 +9,11 @@ app.get('/api/post', (req, res) => {
 	const text = req.body === undefined ? 'undefined' : req.body.text;
 	const uuid = uuidv4();
 
-	console.log('\npost:', text, '\nuuid:', uuid);
-	
-	const data = {text, flag: true};
+	// console.log('\npost:', text, '\nuuid:', uuid);
+	// const data = {text, flag: true};
+	console.log('text', text);
 
-	res.json(data);
+	// res.json(data);
 });
 
 const port = process.env.PORT || 5000;
