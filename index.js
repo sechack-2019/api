@@ -29,12 +29,13 @@ app.post('/api/v1/post', (request, response) => {
 	const uuid = uuidv4();
 	const path = `./test/${uuid}.txt`;
 
-	fs.writeFileSync(path, text);
-	const result = execSync(`npm run -s lint ${path}`).toString();
-	console.log('\n\nresult:' result);
+	// fs.writeFileSync(path, text);
+	// const result = execSync(`npm run -s lint ${path}`).toString();
+	// console.log('\n\nresult:' result);
 
-    response.json({text});
-	fs.unlink(path);
+    response.json({text: text.split('').reverse().join('')});
+    // response.json({text});
+	// fs.unlink(path);
 });
 
 const port = process.env.PORT || 5000;
