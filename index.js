@@ -14,28 +14,23 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.get('/api/v1/check-text', (request, response) => {
-	if (request.body === undefined) {
-		response.json({});
-	}
-
-	const text = request.body.text;
-	console.log('\n$text', text);
-
-	// const uuid = uuidv4();
-	// console.log('\npost:', text, '\nuuid:', uuid);
-	// console.log('text', text);
-	
-	/*
-	const flag = false;
-
-	const data = [
-		{ uuid, text },
-		{ uuid, flag }
-	];
-	*/
-
+app.get('/api/v1/get', (request, response) => {
 	response.json({hoge: 'fuga'});
+});
+
+app.post('/api/v1/post', (request, response) => {
+    const todoData = request.body;
+    const todoTitle = todoData.title;
+
+    const id = uuidv4();
+    const todoItem = {
+        id,
+        title: todoTitle,
+        done: false
+    };
+
+    console.log('Add: ' + JSON.stringify(todoItem));
+    response.json(todoItem);
 });
 
 const port = process.env.PORT || 5000;
