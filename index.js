@@ -20,6 +20,7 @@ app.get('/api/v1/check-text', (request, response) => {
 	}
 
 	const text = request.body.text;
+	console.log('\n$text', text);
 
 	// const uuid = uuidv4();
 	// console.log('\npost:', text, '\nuuid:', uuid);
@@ -34,7 +35,7 @@ app.get('/api/v1/check-text', (request, response) => {
 	];
 	*/
 
-	response.json({hoge: 'fuga'});
+	// response.json({hoge: 'fuga'});
 });
 
 const port = process.env.PORT || 5000;
