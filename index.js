@@ -1,7 +1,8 @@
-const express = require('express');
+const execSync = require('child_process').execSync;
 const bodyParser = require('body-parser');
+const express = require('express');
 const uuidv4 = require('uuid/v4');
-// const cors = require('cors');
+const fs = require('fs');
 const app = express();
 
 // app.use(cors());
@@ -25,9 +26,15 @@ app.post('/api/v1/post', (request, response) => {
     // const text = data.text;
 
 	const text = request.body.text || 'No Text';
-	console.log('Text:', text);
+	const uuid = uuidv4();
+	const path = `./test/${uuid}.txt`;
+
+	fs.writeFileSync(path, text);
+	const result = execSync(`npm run -s lint ${path}`).toString();
+	console.log('\n\nresult:' result);
 
     response.json({text});
+	fs.unlink(path);
 });
 
 const port = process.env.PORT || 5000;
@@ -45,6 +52,6 @@ fetch('https://salutem-api.herokuapp.com/api/v1/post', {
 	body: JSON.stringify({
 		text: 'hoge'
 	})
-}).then(res => res.json()).then(res => console.log(res))
+}).then(res => res.json()).then(res => console.log(res));
 
 */
