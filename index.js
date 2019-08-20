@@ -5,15 +5,21 @@ const app = express();
 
 app.use(cors());
 
-app.get('./api/post', (req, res) => {
+app.get('/api/v1/check-text', (req, res) => {
 	const text = req.body === undefined ? 'undefined' : req.body.text;
 	const uuid = uuidv4();
 
 	// console.log('\npost:', text, '\nuuid:', uuid);
-	// const data = {text, flag: true};
-	console.log('text', text);
+	// console.log('text', text);
+	
+	const flag = false;
 
-	// res.json(data);
+	const data = [
+		{ uuid, text },
+		{ uuid, flag }
+	];
+
+	res.json(data);
 });
 
 const port = process.env.PORT || 5000;
