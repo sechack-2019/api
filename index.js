@@ -19,18 +19,9 @@ app.get('/api/v1/get', (request, response) => {
 });
 
 app.post('/api/v1/post', (request, response) => {
-    const todoData = request.body;
-    const todoTitle = todoData.title;
-
-    const id = uuidv4();
-    const todoItem = {
-        id,
-        title: todoTitle,
-        done: false
-    };
-
-    console.log('Add: ' + JSON.stringify(todoItem));
-    response.json(todoItem);
+    const data = request.body;
+    const text = data.text;
+    response.json({text});
 });
 
 const port = process.env.PORT || 5000;
