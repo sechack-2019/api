@@ -35,7 +35,7 @@ app.get('/api/v1/check-text', (request, response) => {
 	];
 	*/
 
-	// response.json({hoge: 'fuga'});
+	response.json({hoge: 'fuga'});
 });
 
 const port = process.env.PORT || 5000;
