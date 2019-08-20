@@ -1,6 +1,9 @@
 const express = require('express');
 const uuidv4 = require('uuid/v4');
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 app.get('/api/get', (req, res) => {
 	const text = 'test'; //req.body ? '' : req.body.text;
