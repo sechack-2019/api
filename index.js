@@ -3,7 +3,7 @@ const uuidv4 = require('uuid/v4');
 const app = express();
 
 app.get('/api/get', (req, res) => {
-	const text = req.body.text;
+	const text = 'test'; //req.body ? '' : req.body.text;
 	const uuid = uuidv4();
 
 	console.log('\npost:', text, '\nuuid:', uuid);
