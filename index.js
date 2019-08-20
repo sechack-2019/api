@@ -5,7 +5,7 @@ const app = express();
 
 app.use(cors());
 
-app.get('/api/post', (req, res) => {
+app.get('./api/post', (req, res) => {
 	const text = req.body === undefined ? 'undefined' : req.body.text;
 	const uuid = uuidv4();
 
