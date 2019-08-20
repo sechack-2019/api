@@ -5,9 +5,14 @@ const app = express();
 app.get('/api/get', (req, res) => {
 	const text = req.body.text;
 	const uuid = uuidv4();
-	
+
 	console.log('\npost:', text, '\nuuid:', uuid);
-	res.json([]);
+	
+	const data = [
+		{title: 'hoge', done: true}
+	];
+
+	res.json(data);
 });
 
 const port = process.env.PORT || 5000;
