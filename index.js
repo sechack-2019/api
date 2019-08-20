@@ -19,9 +19,12 @@ app.get('/api/v1/get', (request, response) => {
 });
 
 app.post('/api/v1/post', (request, response) => {
-    const data = request.body;
-    const text = data.text;
-    response.json({text});
+    // const data = request.body;
+    // const text = data.text;
+
+	console.log(request.text || 'No Text');
+
+    response.json({text: 'hello'});
 });
 
 const port = process.env.PORT || 5000;
