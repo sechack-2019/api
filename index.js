@@ -15,6 +15,12 @@ app.use(function(req, res, next) {
 	next();
 });
 
+/*
+app.get('/', (request, response) => {
+    request.send('<h1>hoge</h1>');
+});
+*/
+
 app.get('/api/v1/get', (request, response) => {
 	response.json({hoge: 'fuga'});
 });
@@ -23,6 +29,8 @@ app.post('/api/v1/post', (request, response) => {
 	const text = request.body.text || 'No Text';
 	const uuid = uuidv4();
 	const path = `./test/${uuid}.txt`;
+
+    console.log('uuid:', uuid, 'text', text, '\n');
 
 	// fs.writeFileSync(path, text);
 	// const result = execSync(`npm run -s lint ${path}`).toString();
@@ -33,5 +41,53 @@ app.post('/api/v1/post', (request, response) => {
 	// fs.unlink(path);
 });
 
+app.post('/api/v1/isSafeName', (request, response) => {
+    if (request.body === undefined) {
+        response.json({});
+        return null;
+    }
+
+    const text = request.body.text;
+    const uuid = uuidv4();
+
+    let isSafe = true;
+    const configJson = JSON.parse(config);
+
+    Object.keys(configJson.unusable).map(key => {
+        if (!isSafe) {
+            return null;
+        }
+
+        const regexp = new RegExp(configJson(key), g);
+        if (text.match(regexp) !== null) {
+            isSafe = false;
+        }
+    });
+
+    response.json({isSafe});
+});
+
+/*
+app.post('/api/v1/isSafeDescription', (request, response) => {
+    // textlintwoつかって文章校正
+    const lintBinary = execSync('textlint');
+    const lintString = lintBinary.toString();
+
+    // errorsなどをもつオブジェクトを返す
+    const lintObject = JSON.parse(lintString);
+    const errors = lintObject.error || lintObject.errors;
+
+    if (erros) {
+        response.json({isSafe: false});
+    }
+});
+*/
+
+
+const config = fs.readFileSync('config.json', 'utf-8');
+
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});
+
