@@ -30,17 +30,29 @@ app.post('/api/v1/post', (request, response) => {
 	const uuid = uuidv4();
 	const path = `./test/${uuid}.txt`;
 
-    console.log('uuid:', uuid, 'text', text, '\n');
+    // console.log('uuid:', uuid, 'text', text, '\n');
 
 	// fs.writeFileSync(path, text);
 	// const result = execSync(`npm run -s lint ${path}`).toString();
 	// console.log('\n\nresult:' result);
 
-    response.json({text: text.split('').reverse().join('')});
+    // response.json({text: text.split('').reverse().join('')});
     // response.json({text});
 	// fs.unlink(path);
+
+    let flag = false;
+
+    config.unusable.forEach(pattern => {
+        const regexp = new RegExp(pattern, 'g');
+        if (text.match(regexp) !== null) {
+            flag = true;
+        }
+    });
+
+    response.json({result: {id: flag ? 1 : 0}});
 });
 
+/*
 app.post('/api/v1/isSafeName', (request, response) => {
     if (request.body === undefined) {
         response.json({});
@@ -66,6 +78,7 @@ app.post('/api/v1/isSafeName', (request, response) => {
 
     response.json({isSafe});
 });
+*/
 
 /*
 app.post('/api/v1/isSafeDescription', (request, response) => {
@@ -84,7 +97,8 @@ app.post('/api/v1/isSafeDescription', (request, response) => {
 */
 
 
-const config = fs.readFileSync('config.json', 'utf-8');
+const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
+// console.log('config', config);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
