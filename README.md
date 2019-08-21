@@ -10,13 +10,15 @@ fetch('https://salutem-api.herokuapp.com/api/v1/post', {
 		'Content-Type': 'application/json',
 	},
 	body: JSON.stringify({
-		text: 'めぐみんはかわいい！'
+		text: 'かわいいねこ'　// ここに商品名
 	})
-}).then(res => res.json()).then(res => console.log(res));
+})
+.then(res => res.json())
+.then(res => console.log(res));
 ```
 
 will be return:
 
 ```js
-{text: "！いいわかはんみぐめ"}
+{result: {id: 0}}
 ```
