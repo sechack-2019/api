@@ -1,4 +1,3 @@
-// const execSync = require('child_process').execSync;
 const TextLintEngine = require('textlint').TextLintEngine;
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -21,7 +20,7 @@ app.get('/api/v1/get', (request, response) => {
 });
 
 app.post('/api/v1/post', (request, response) => {
-	const text = request.body.text || 'No Text';
+    const text = request.body.text || 'No Text';
     let flag = false;
 
     config.unusable.forEach(pattern => {
@@ -33,11 +32,8 @@ app.post('/api/v1/post', (request, response) => {
 });
 
 app.post('/api/v1/lint', (request, response) => {
-	const text = request.body.text || 'No Text';
+    const text = request.body.text || 'No Text';
     let flag = false;
-
-    // test
-    // execSync('npx textlint ./test/hoge.txt');
 
     const engine = new TextLintEngine({configFile: ".textlintrc"});
     engine.executeOnText(text).then(results => {
@@ -47,11 +43,8 @@ app.post('/api/v1/lint', (request, response) => {
             const output = engine.formatResults(results);
         }
 
-        // res.render('result', { results: results[0].messages });
         response.json({result: results[0].messages});
     });
-
-    // response.json({result: {id: flag ? 1 : 0, text}});
 });
 
 const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
