@@ -41,6 +41,7 @@ app.post('/api/v1/lint', (request, response) => {
 
         if (engine.isErrorResults(results)) {
             const output = engine.formatResults(results);
+            console.log('output', output);
         }
 
         response.json({result: results[0].messages});
