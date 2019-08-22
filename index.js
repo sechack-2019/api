@@ -35,7 +35,10 @@ app.post('/api/v1/lint', (request, response) => {
 	const text = request.body.text || 'No Text';
     let flag = false;
 
-    response.json({result: {id: flag ? 1 : 0}});
+    // test
+    execSync('npx textlint ./test/hoge.txt');
+
+    response.json({result: {id: flag ? 1 : 0, text}});
 });
 
 const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
