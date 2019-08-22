@@ -34,7 +34,7 @@ app.post('/api/v1/post', (request, response) => {
 });
 
 app.post('/api/v1/lint', (request, response) => {
-    console.log('\n\n', '-'.repeat(15));
+    console.log('\n\n', 'post:', request, '\n', '= '.repeat(10), '>', '\n\n');
 
     const text = request.body.text || 'No Text';
     let flag = false;
@@ -45,10 +45,11 @@ app.post('/api/v1/lint', (request, response) => {
 
         if (engine.isErrorResults(results)) {
             const output = engine.formatResults(results);
-            console.log('output', output);
+            // console.log('output', output);
         }
 
         response.json({result: results[0].messages});
+        console.log('\n\n', '<', '= '.repeat(10));
     });
 });
 
