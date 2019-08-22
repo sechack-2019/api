@@ -1,4 +1,5 @@
-const execSync = require('child_process').execSync;
+// const execSync = require('child_process').execSync;
+const TextLintEngine = require('textlint').TextLintEngine;
 const bodyParser = require('body-parser');
 const express = require('express');
 const uuidv4 = require('uuid/v4');
@@ -36,9 +37,21 @@ app.post('/api/v1/lint', (request, response) => {
     let flag = false;
 
     // test
-    execSync('npx textlint ./test/hoge.txt');
+    // execSync('npx textlint ./test/hoge.txt');
 
-    response.json({result: {id: flag ? 1 : 0, text}});
+    const engine = new TextLintEngine({configFile: ".textlintrc"});
+    engine.executeOnText(text).then(results => {
+        console.log(results[0].messages);
+
+        if (engine.isErrorResults(results)) {
+            const output = engine.formatResults(results);
+        }
+
+        // res.render('result', { results: results[0].messages });
+        response.json({result: results[0].messages});
+    });
+
+    // response.json({result: {id: flag ? 1 : 0, text}});
 });
 
 const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
