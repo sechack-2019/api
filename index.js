@@ -20,8 +20,6 @@ app.get('/api/v1/get', (request, response) => {
 });
 
 app.post('/api/v1/post', (request, response) => {
-    console.log('\n\n', '-'.repeat(15));
-
     const text = request.body.text || 'No Text';
     let flag = false;
 
