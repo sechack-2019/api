@@ -1,6 +1,6 @@
 {
     "rules": {
-        "spellcheck-tech-word": true,
-        "preset-ja-technical-writing": true
+        "ja-no-weak-phrase": true,
+        "ja-no-abusage": true
     }
 }
