@@ -1,6 +1,7 @@
 {
     "rules": {
         "no-exclamation-question-mark": true,
+        "no-double-negative-ja": true,
         "ja-unnatural-alphabet": true,
         "ja-no-weak-phrase": true,
         "ja-no-abusage": true
