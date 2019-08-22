@@ -32,15 +32,16 @@ app.post('/api/v1/post', (request, response) => {
 });
 
 app.post('/api/v1/lint', (request, response) => {
-    console.log('\n', 'post:', request, '\n', '= '.repeat(30), '>', '\n');
+    // console.log('\n', 'post:', request, '\n', '= '.repeat(30), '>', '\n');
 
     const text = request.body.text || 'No Text';
     let flag = false;
 
     const engine = new TextLintEngine({configFile: ".textlintrc"});
     engine.executeOnText(text).then(results => {
-        response.json({result: results[0].messages});
-        console.log('\n', '<', '= '.repeat(30));
+        response.json({result: {errors: results[0].messages}});
+
+        // console.log('\n', '<', '= '.repeat(30));
     });
 });
 
